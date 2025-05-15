@@ -25,17 +25,22 @@ echo "This only install panel"
 
 apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
 
-LC_ALL=C.UTF-8 admariadb -u root -p root
+# Add additional repositories for PHP (Ubuntu 20.04 and Ubuntu 22.04)
+LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 
-CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
-CREATE DATABASE panel;
-GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;
-exitd-apt-repository -y ppa:ondrej/php
-
+# Add Redis official APT repository
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 
+# MariaDB repo setup script (Ubuntu 20.04)
 curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash
+
+# Update repositories list
+apt update
+
+# Install Dependencies
+apt -y install php8.3 php8.3-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
+
 
 apt update
 
@@ -68,7 +73,8 @@ sudo ps aux | grep mysql
    sudo pkill mysqld
    sudo pkill mariadbd
 
-sudo mariadbd --socket=/var/run/mysqld/mysqld.sock --user=root > /dev/null
+nohup sudo mariadbd --socket=/var/run/mysqld/mysqld.sock --user=root > /dev/null 2>&1 &
+
 
 # Config
 DB_USER="pterodactyl"
