@@ -18,9 +18,9 @@ services:
     networks:
       - wings0
     ports:
-      - "8080:8080"
+      - "3000:3000"
       - "2022:2022"
-      - "443:443"
+      - "3001:3001"
     tty: true
     environment:
       TZ: "UTC"
