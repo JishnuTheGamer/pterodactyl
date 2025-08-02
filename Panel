@@ -92,8 +92,11 @@ docker-compose up -d
 
 echo "✅ Pterodactyl Panel installation complete!"
 
+# ⏳ Wait for 5 seconds to let the database start properly
+sleep 5
+
 # Step 4: Create an admin user for the Panel
 docker-compose run --rm panel php artisan p:user:make
 
 echo "🌐 Access your panel at: http://localhost or your-server-ip"
-echo "🌐 Access your panel at port 8080: http://localhost:8080 or your-server-ip:8080"
+echo "🌐 Access your panel at port 8030: http://localhost:8030 or your-server-ip:8030"
