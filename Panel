@@ -4,6 +4,11 @@
 
 echo "📦 Installing Pterodactyl Panel with Docker..."
 
+# Updates
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version
+
 # Step 1: Create directory structure
 mkdir -p pterodactyl/panel
 cd pterodactyl/panel || exit
@@ -86,8 +91,9 @@ mkdir -p ./data/{database,var,nginx,certs,logs}
 docker-compose up -d
 
 echo "✅ Pterodactyl Panel installation complete!"
-echo "🌐 Access your panel at: http://localhost or your-server-ip"
-echo "🌐 Access your panel at port 80: http://localhost:80 or your-server-ip:80"
 
 # Step 4: Create an admin user for the Panel
 docker-compose run --rm panel php artisan p:user:make
+
+echo "🌐 Access your panel at: http://localhost or your-server-ip"
+echo "🌐 Access your panel at port 8080: http://localhost:8080 or your-server-ip:8080"
