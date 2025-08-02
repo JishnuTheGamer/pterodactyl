@@ -3,4 +3,4 @@
 # cmd creadit hopingboyz
 
 # download
-git clone https://github.com/JishnuTheGamer/Ptero-codsanbox.git && cd Ptero-codsanbox && apt install zip -y && unzip Ptero-codsanbox.zip && bash ptero-codesanbox.txt
+git clone https://github.com/JishnuTheGamer/Ptero-codsanbox.git && cd Ptero-codsanbox && apt install zip -y && unzip ptero-codesanbox.zip && bash ptero-codesanbox.txt
